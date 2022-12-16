@@ -7,14 +7,14 @@ export function Home() {
     const [dir, setdir] = useState([]);
 
     function home() {
-        axios.get("http://192.168.100.21:5001/home").then(result => {
+        axios.get("http://localhost:5001/home").then(result => {
             setfile(result.data.file);
             setdir(result.data.directories);
         });
     }
 
     function upfolder(a) {
-        axios.post("http://192.168.100.21:5001/upfolder", {
+        axios.post("http://localhost:5001/upfolder", {
             folder: a
         }).then(result => {
             setfile(result.data.file);
@@ -23,7 +23,7 @@ export function Home() {
     }
 
     function downdir() {
-        axios.get("http://192.168.100.21:5001/downdir").then(result => {
+        axios.get("http://localhost:5001/downdir").then(result => {
             setfile(result.data.file);
             setdir(result.data.directories);
         }).catch(err => {
@@ -35,7 +35,7 @@ export function Home() {
     }
 
     async function downfile(a) {
-        const response = await axios.get('http://192.168.100.21:5001/download', {
+        const response = await axios.get('http://localhost:5001/download', {
             params: {
                 filename: a
             },
@@ -51,7 +51,7 @@ export function Home() {
     }
 
     function delfile(a) {
-        axios.delete("http://192.168.100.21:5001/delfile", {
+        axios.delete("http://localhost:5001/delfile", {
             params: {
                 file: a
             }
@@ -63,7 +63,7 @@ export function Home() {
     }
 
     function deldir(a) {
-        axios.delete("http://192.168.100.21:5001/deldir", {
+        axios.delete("http://localhost:5001/deldir", {
             params: {
                 dir: a
             }
@@ -81,7 +81,7 @@ export function Home() {
         for (var count = 0; count < data.length; count++) {
             formdata.append('data', data[count]);
         }
-        axios.post("http://192.168.100.21:5001/upload", formdata).then(result => {
+        axios.post("http://localhost:5001/upload", formdata).then(result => {
             if (result.status === 200) {
                 upfolder();
             }
@@ -92,7 +92,7 @@ export function Home() {
     const reffolder = useRef();
     const [namefolder, setnamefolder] = useState("");
     function newfolder() {
-        axios.post("http://192.168.100.21:5001/newfolder", {
+        axios.post("http://localhost:5001/newfolder", {
             folder: namefolder
         }).then(result => {
             if (result.status === 200) {
